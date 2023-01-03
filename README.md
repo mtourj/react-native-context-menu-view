@@ -1,3 +1,7 @@
+## ABOUT THIS FORK
+
+This fork of `react-native-context-menu-view` introduces web support with the same existing API.
+
 # react-native-context-menu-view
 
 Use native context menu functionality from React Native. On iOS 13+ this uses `UIMenu` functionality, and on Android it uses a `PopUpMenu`.
