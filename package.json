@@ -3,7 +3,7 @@
   "title": "React Native Context Menu View",
   "version": "1.20.0",
   "description": "Use native context menu views from React Native",
-  "main": "dist/index.js",
+  "main": "dist/",
   "types": "index.d.ts",
   "scripts": {
     "prepublish": "rm -rf dist/ && babel src --out-dir dist",

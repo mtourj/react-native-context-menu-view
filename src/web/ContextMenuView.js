@@ -15,18 +15,25 @@ export default function ContextMenuView(props) {
       },
     });
 
-    const onClick = (e) => {
+    return () => {
+      contextMenu.current?.remove();
+      contextMenu.current = undefined;
+    };
+  }, []);
+
+  useEffect(() => {
+    const onEvent = (e) => {
       if (e.target !== contextMenu.current && isOpen.current) {
         hideContextMenu();
       }
     };
 
-    window.addEventListener("click", onClick);
+    window.addEventListener("click", onEvent);
+    window.addEventListener("scroll", onEvent, true);
 
     return () => {
-      contextMenu.current?.remove();
-      contextMenu.current = undefined;
-      window.removeEventListener("click", onClick);
+      window.removeEventListener("click", onEvent);
+      window.removeEventListener("scroll", onEvent);
     };
   }, [contextMenu, isOpen]);
 
@@ -77,6 +84,8 @@ export default function ContextMenuView(props) {
     style.borderRadius = `${6}px`;
     style.transition = "all 0.2s ease-out";
     style.overflowX = "hidden";
+    style.width = `${MENU_MAX_WIDTH}px`;
+    style.maxWidth = `${MENU_MAX_WIDTH}px`;
 
     if (window.innerWidth - pageX < MENU_MAX_WIDTH) {
       style.left = `${pageX - MENU_MAX_WIDTH}px`;
@@ -122,6 +131,10 @@ export default function ContextMenuView(props) {
       };
 
       const text = document.createElement("div");
+
+      if (action.destructive) {
+        text.style.color = "crimson";
+      }
 
       Object.assign(text.style, styles.menuItemText, props.menuItemTextStyle);
 
@@ -170,7 +183,6 @@ const styles = StyleSheet.create({
   menu: {
     backgroundColor: "white",
     flexDirection: "column",
-    maxWidth: MENU_MAX_WIDTH,
     maxHeight: 280,
     elevation: 1,
     shadowColor: "gray",
@@ -182,6 +194,7 @@ const styles = StyleSheet.create({
     },
     borderWidth: 1,
     borderColor: "#eaeaea",
+    borderStyle: "solid",
   },
   menuItem: {
     width: "100%",
