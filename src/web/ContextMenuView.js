@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Pressable, StyleSheet } from "react-native";
 
-const MENU_MAX_WIDTH = 128;
+const MENU_MAX_WIDTH = 140;
 
 export default function ContextMenuView(props) {
   const contextMenu = useRef();
@@ -28,7 +28,7 @@ export default function ContextMenuView(props) {
       }
     };
 
-    window.addEventListener("click", onEvent);
+    window.addEventListener("click", onEvent, true);
     window.addEventListener("scroll", onEvent, true);
 
     return () => {
@@ -105,6 +105,7 @@ export default function ContextMenuView(props) {
 
     let menuItemStyle = {
       display: "flex",
+      boxSizing: 'border-box',
       padding: `${10}px`,
       cursor: "pointer",
       transition: "background-color 0.2s ease-out",
