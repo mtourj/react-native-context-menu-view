@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "types": "index.d.ts",
   "scripts": {
-    "prepublish": "babel src --out-dir dist",
+    "prepublish": "rm -rf dist/ && babel src --out-dir dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

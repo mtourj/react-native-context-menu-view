@@ -15,17 +15,20 @@ export default function ContextMenuView(props) {
       },
     });
 
-    window.addEventListener("click", (e) => {
+    const onClick = (e) => {
       if (e.target !== contextMenu.current && isOpen.current) {
         hideContextMenu();
       }
-    });
+    };
+
+    window.addEventListener("click", onClick);
 
     return () => {
       contextMenu.current?.remove();
       contextMenu.current = undefined;
+      window.removeEventListener("click", onClick);
     };
-  }, [contextMenu]);
+  }, [contextMenu, isOpen]);
 
   function onPress(e) {
     if (!props.dropdownMenuMode) return;
@@ -64,6 +67,8 @@ export default function ContextMenuView(props) {
   function showContextMenu(pageX, pageY) {
     const menu = contextMenu.current;
 
+    if (!menu) return;
+
     let style = {};
 
     style.display = "flex";
@@ -71,6 +76,7 @@ export default function ContextMenuView(props) {
     style.position = "absolute";
     style.borderRadius = `${6}px`;
     style.transition = "all 0.2s ease-out";
+    style.overflow = "hidden auto";
 
     if (window.innerWidth - pageX < MENU_MAX_WIDTH) {
       style.left = `${pageX - MENU_MAX_WIDTH}px`;
@@ -135,6 +141,8 @@ export default function ContextMenuView(props) {
   function hideContextMenu() {
     const menu = contextMenu.current;
 
+    if (!menu) return;
+
     menu.style.opacity = 0;
     setTimeout(() => {
       menu.style.display = "none";
@@ -146,7 +154,7 @@ export default function ContextMenuView(props) {
   }
 
   return (
-    <Pressable onPress={onPress} onLongPress={onLongPress}>
+    <Pressable style={props.style} onPress={onPress} onLongPress={onLongPress}>
       {props.children}
     </Pressable>
   );
@@ -166,7 +174,8 @@ const styles = StyleSheet.create({
       width: 0,
       height: 0,
     },
-    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: "#eaeaea",
   },
   menuItem: {
     width: "100%",
