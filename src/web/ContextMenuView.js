@@ -76,7 +76,7 @@ export default function ContextMenuView(props) {
     style.position = "absolute";
     style.borderRadius = `${6}px`;
     style.transition = "all 0.2s ease-out";
-    style.overflow = "hidden auto";
+    style.overflowX = "hidden";
 
     if (window.innerWidth - pageX < MENU_MAX_WIDTH) {
       style.left = `${pageX - MENU_MAX_WIDTH}px`;
@@ -95,6 +95,7 @@ export default function ContextMenuView(props) {
     Object.assign(menu.style, style);
 
     let menuItemStyle = {
+      display: "flex",
       padding: `${10}px`,
       cursor: "pointer",
       transition: "background-color 0.2s ease-out",
@@ -154,7 +155,12 @@ export default function ContextMenuView(props) {
   }
 
   return (
-    <Pressable style={props.style} onPress={onPress} onLongPress={onLongPress}>
+    <Pressable
+      disabled={props.disabled}
+      style={props.style}
+      onPress={onPress}
+      onLongPress={onLongPress}
+    >
       {props.children}
     </Pressable>
   );
