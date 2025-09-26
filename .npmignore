@@ -1,3 +1,4 @@
-example/
-src/
+/example/
+/src/
+
 node_modules/
