@@ -1,4 +1,4 @@
-package com.mpiannucci.reactnativecontextmenu;
+package com.mtourj.reactnativecontextmenu;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

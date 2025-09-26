@@ -45,7 +45,7 @@ def DEFAULT_TARGET_SDK_VERSION = 28
 android {
     def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
     if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
-      namespace = "com.mpiannucci.reactnativecontextmenu"
+      namespace = "com.mtourj.reactnativecontextmenu"
     }
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
     buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
@@ -87,7 +87,7 @@ def configureReactNativePom(def pom) {
         name packageJson.title
         artifactId packageJson.name
         version = packageJson.version
-        group = "com.mpiannucci.reactnativecontextmenu"
+        group = "com.mtourj.reactnativecontextmenu"
         description packageJson.description
         url packageJson.repository.baseUrl
 

@@ -1,4 +1,4 @@
-package com.mpiannucci.reactnativecontextmenu;
+package com.mtourj.reactnativecontextmenu;
 
 import java.util.Arrays;
 import java.util.Collections;
